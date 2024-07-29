@@ -2,6 +2,12 @@
 
 This is a base template to bootstrap a new orgs example
 
+## Set Up
+
+```
+cp .env.example .env.local
+```
+
 ## Getting Started
 
 First, run the development server:
