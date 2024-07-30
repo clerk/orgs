@@ -1,8 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/sTDXeQmu41a
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from "next/link";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
