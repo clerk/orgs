@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { SignedOut, SignedIn, UserButton, SignInButton } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
 
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
@@ -27,7 +27,18 @@ export default function AuthLayout({ children }: PropsWithChildren) {
         </SignedIn>
       </header>
       <main className="flex-1 p-8">
-        <div className="max-w-3xl mx-auto space-y-4">{children}</div>
+        <div className="max-w-3xl mx-auto space-y-4">
+          {children}
+
+          <SignedIn>
+            <div className="pt-8">
+              You are logged in:{" "}
+              <Link href="/dashboard">
+                <Button size="sm">Go to Dashboard</Button>
+              </Link>
+            </div>
+          </SignedIn>
+        </div>
       </main>
     </div>
   );
