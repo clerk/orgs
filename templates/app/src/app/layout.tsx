@@ -18,9 +18,7 @@ export default function RootLayout({
   return (
     <ClerkProvider signInFallbackRedirectUrl="/dashboard">
       <html lang="en">
-        <body className={inter.className}>
-          <main>{children}</main>
-        </body>
+        <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
   );
