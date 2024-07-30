@@ -1,6 +1,12 @@
-# templates: default
+# templates: app
 
-This is a base template to bootstrap a new orgs example
+This is a `app` template to bootstrap a new orgs example.
+
+## Includes
+
+- A marketing site with Control components
+- A dashboard w/ Org switching and User button
+- Custom Sign-in & Sign-up pages
 
 ## Set Up
 
