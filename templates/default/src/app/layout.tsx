@@ -2,8 +2,19 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Inter } from "next/font/google";
 import "./globals.css";
+<<<<<<< HEAD
 import { ClerkProvider, OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+=======
+import {
+  ClerkProvider,
+  OrganizationSwitcher,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+>>>>>>> af42914 (rename base to default to match create-next-app)
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +33,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <main>
+<<<<<<< HEAD
             <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
               <div className="hidden border-r bg-muted/40 lg:block">
                 <div className="flex flex-col gap-2">
@@ -89,6 +101,29 @@ export default function RootLayout({
                 </main>
               </div>
             </div>
+=======
+            <header className="w-full bg-muted py-4">
+              <div className="container mx-auto flex items-center justify-between px-4">
+                <div className="text-lg font-medium">
+                  Orgs: {"<Name of Example>"}
+                </div>
+                <SignedOut>
+                  <SignInButton>
+                    <Button variant="outline">Sign In with Clerk</Button>
+                  </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                  <OrganizationSwitcher />
+                  <UserButton />
+                </SignedIn>
+              </div>
+            </header>
+            <section className="container mx-auto px-4 py-8 max-w-10xl">
+              <div className="items-center font-mono text-sm pb-24">
+                {children}
+              </div>
+            </section>
+>>>>>>> af42914 (rename base to default to match create-next-app)
           </main>
         </body>
       </html>
