@@ -1,12 +1,6 @@
-# templates: app
+# force-an-org
 
-This is a `app` template to bootstrap a new orgs example.
-
-## Includes
-
-- A marketing site with Control components
-- A dashboard w/ Org switching and User button
-- Custom Sign-in & Sign-up pages
+This example shows how to build an application that does not allow users to operate under a _Personal Workspace_ and uses middleware to ensure that a user's session has an active organization.
 
 ## Set Up
 
@@ -29,5 +23,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
