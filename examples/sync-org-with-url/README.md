@@ -1,4 +1,4 @@
-# templates: setactive-with-slug
+# templates: sync-org-with-url
 
 This is a base template to bootstrap a new orgs example
 
