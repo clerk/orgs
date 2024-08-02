@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useParams } from "next/navigation"
 import {useAuth, useOrganizationList} from "@clerk/nextjs"
 
-export function SyncActiveOrganizationFromURLToSession() {
+export function SyncActiveOrganizationFromUrlToSession() {
   const { setActive, isLoaded } = useOrganizationList();
 
   // Get the organization slug from the session

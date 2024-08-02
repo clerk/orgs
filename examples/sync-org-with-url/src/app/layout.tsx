@@ -11,7 +11,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import {SyncActiveOrganizationFromURLToSession} from "@/app/utils/sync-active-organization-from-u-r-l-to-session";
+import {SyncActiveOrganizationFromUrlToSession} from "@/app/utils/sync-active-organization-from-url-to-session";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
   <ClerkProvider>
-    <SyncActiveOrganizationFromURLToSession/>
+    <SyncActiveOrganizationFromUrlToSession/>
     <html lang="en">
         <body className={inter.className}>
           <main>
