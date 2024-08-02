@@ -1,9 +1,8 @@
 "use client"
 
 import { useEffect } from "react"
-import { redirect, useParams } from "next/navigation"
-import {useAuth, useOrganization, useOrganizationList, useUser} from "@clerk/nextjs"
-import {currentUser} from "@clerk/nextjs/server";
+import { useParams } from "next/navigation"
+import {useAuth, useOrganizationList} from "@clerk/nextjs"
 
 export function SyncActiveOrganizationFromURLToSession() {
   const { setActive, isLoaded } = useOrganizationList();
@@ -19,21 +18,12 @@ export function SyncActiveOrganizationFromURLToSession() {
 
     console.log("Running useEffect", orgSlug, urlOrgSlug);
 
-    // If the org ID in the URL is not the same as the org ID in the session (the active organization), set the active organization to be the org ID from the URL
+    // If the org slug in the URL is not the same as the org slug in the session (the active organization),
+    // set the active organization to be the org from the URL.
     if (urlOrgSlug !== orgSlug) {
-      void setActive({ organization: orgID(urlOrgSlug) });
+      void setActive({ organization: urlOrgSlug });
     }
   }, [orgSlug, isLoaded, setActive, urlOrgSlug])
 
-  return null;
-}
-
-function orgID(orgSlug: string) {
-  switch (orgSlug) {
-    case "acmecorp":
-      return "org_2k4MLA9BfdJz2qvaSeYKDJHdABY";
-    case "betacorp":
-      return "org_2k4Mge5dFuPHlxPkbggeN427Vml";
-  }
   return null;
 }
