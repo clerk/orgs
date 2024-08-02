@@ -1,4 +1,4 @@
-# templates: default
+# templates: setactive-with-slug
 
 This is a base template to bootstrap a new orgs example
 

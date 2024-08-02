@@ -11,6 +11,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import {SyncActiveOrganizationFromURLToSession} from "@/app/utils/sync-active-organization-from-u-r-l-to-session";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+  <ClerkProvider>
+    <SyncActiveOrganizationFromURLToSession/>
+    <html lang="en">
         <body className={inter.className}>
           <main>
             <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
@@ -36,6 +38,7 @@ export default function RootLayout({
                     <OrganizationSwitcher
                       skipInvitationScreen={true}
                       afterCreateOrganizationUrl="/dashboard"
+                      hidePersonal={true}
                     />
                   </div>
                   <div className="flex-1">
