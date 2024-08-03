@@ -1,9 +1,30 @@
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+"use client";
+import {
+  ClerkLoading,
+  CreateOrganization,
+  OrganizationList,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useAuth,
+  useOrganizationList,
+  useUser,
+} from "@clerk/nextjs";
 
 export default function Dashboard() {
+  const { user, isLoaded } = useUser();
+  const { userMemberships, isLoaded: isMembershipLoaded } =
+    useOrganizationList();
+  if (!isLoaded || !isMembershipLoaded) return <ClerkLoading />;
+
   return (
-    <>
-      <p className="pb-8">You are signed in to the dashboard</p>
-    </>
+    <div className="flex flex-col gap-4">
+      <p>You are enrolled to: {userMemberships.count} organizations.</p>
+      <div className="flex flex-row gap-4">
+        <CreateOrganization />
+        <OrganizationList />
+      </div>
+    </div>
   );
 }
