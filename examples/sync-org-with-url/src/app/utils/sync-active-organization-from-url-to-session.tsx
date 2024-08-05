@@ -15,9 +15,7 @@ export function SyncActiveOrganizationFromUrlToSession() {
 
   useEffect(() => {
     if (!isLoaded) return;
-
-    console.log("Running useEffect", orgSlug, urlOrgSlug);
-
+    
     // If the org slug in the URL is not the same as the org slug in the session (the active organization),
     // set the active organization to be the org from the URL.
     if (urlOrgSlug !== orgSlug) {
@@ -25,5 +23,5 @@ export function SyncActiveOrganizationFromUrlToSession() {
     }
   }, [orgSlug, isLoaded, setActive, urlOrgSlug])
 
-  return null;
+  return <></>
 }

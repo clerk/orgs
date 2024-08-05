@@ -37,8 +37,9 @@ export default function RootLayout({
                   <div className="flex h-[70px] items-center pl-6">
                     <OrganizationSwitcher
                       skipInvitationScreen={true}
-                      afterCreateOrganizationUrl="/dashboard"
                       hidePersonal={true}
+                      afterCreateOrganizationUrl='/orgs/:slug'
+                      afterSelectOrganizationUrl='/orgs/:slug'
                     />
                   </div>
                   <div className="flex-1">
