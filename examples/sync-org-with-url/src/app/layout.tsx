@@ -27,10 +27,10 @@ export default function RootLayout({
 }>) {
   return (
   <ClerkProvider>
-    <SyncActiveOrganizationFromUrlToSession/>
     <html lang="en">
         <body className={inter.className}>
           <main>
+            <SyncActiveOrganizationFromUrlToSession/>
             <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
               <div className="hidden border-r bg-muted/40 lg:block">
                 <div className="flex flex-col gap-2">
