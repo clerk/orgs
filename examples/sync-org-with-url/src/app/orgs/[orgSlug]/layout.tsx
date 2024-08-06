@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import "../../globals.css";
 import Link from "next/link";
 import {
-  ClerkProvider,
   OrganizationSwitcher,
   SignInButton,
   SignedIn,
@@ -37,8 +36,8 @@ export default function Layout({
               hidePersonal={true}
               afterCreateOrganizationUrl='/orgs/:slug'
               // NOTE(izaak): the below makes sure that only the org slug component of the path switches
-              // when we change URLs, and was kind of annoying to figure out.
-              afterSelectOrganizationUrl={pathname.replace(/\/orgs\/([^\/]+)(\/.*)/, '/orgs/:slug$2')}
+              // when we change URLs, and was kind of annoying to figure out, and isn't documented!
+              afterSelectOrganizationUrl={pathname.replace(/^\/orgs\/([^\/]+)(\/.*)?$/, '/orgs/:slug$2')}
             />
           </div>
           <div className="flex-1">
