@@ -19,12 +19,24 @@ export default function Dashboard() {
   if (!isLoaded || !isMembershipLoaded) return <ClerkLoading />;
 
   return (
-    <div className="flex flex-col gap-4">
-      <p>You are enrolled to: {userMemberships.count} organizations.</p>
-      <div className="flex flex-row gap-4">
-        <CreateOrganization />
-        <OrganizationList />
+    <>
+      <div className="flex flex-col gap-4">
+        <p>
+          <strong>current user:</strong> {user?.id}
+        </p>
+        <p>
+          This user is currently{" "}
+          <strong>
+            {" "}
+            {user?.createOrganizationEnabled ? "allowed" : "not allowed"}
+          </strong>{" "}
+          to create organizations
+        </p>
+        <div className="flex flex-row gap-4">
+          <CreateOrganization />
+          <OrganizationList />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
