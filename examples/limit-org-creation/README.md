@@ -1,6 +1,6 @@
-# templates: app
+# templates: limit-org-creation
 
-This is a `app` template to bootstrap a new orgs example.
+An example on how to use our org creation limitations to control which users can create new organizations
 
 ## Includes
 
