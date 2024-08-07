@@ -11,7 +11,7 @@ This is a `app` template to bootstrap a new orgs example.
 ## Set Up
 
 ```
-cp .env.example .env.local
+cp .env.local.example .env.local
 ```
 
 ## Getting Started
