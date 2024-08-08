@@ -1,7 +1,10 @@
 import { auth } from '@clerk/nextjs/server';
 
 export default function Home() {
+
   const {orgSlug} = auth();
+
+  console.log("I'm the server and I got this slug: ", orgSlug);
 
   return (
    <>

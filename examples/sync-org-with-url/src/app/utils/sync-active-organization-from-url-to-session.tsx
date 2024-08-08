@@ -1,10 +1,14 @@
 "use client"
 
-import {useEffect, useState} from "react"
+import {useEffect, useLayoutEffect, useState} from "react"
 import {useParams} from "next/navigation"
 import {OrganizationList, useAuth, useOrganizationList, useUser} from "@clerk/nextjs"
 
-export function SyncActiveOrganizationFromUrlToSession() {
+
+
+export function SyncActiveOrganizationFromUrlToSession(
+  { children }: { children: React.ReactNode }
+): React.ReactElement | null {
   const { setActive, isLoaded } = useOrganizationList();
 
   // Get the organization slug from the session
@@ -17,7 +21,7 @@ export function SyncActiveOrganizationFromUrlToSession() {
 
   const [isMember, setIsMember] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isLoaded) return;
 
     if (urlOrgSlug) {
@@ -36,6 +40,10 @@ export function SyncActiveOrganizationFromUrlToSession() {
     }
   }, [orgSlug, isLoaded, setActive, urlOrgSlug])
 
+  if (urlOrgSlug !== orgSlug) {
+    return null
+  }
+
   return (
     <>
       {urlOrgSlug && !isMember &&
@@ -48,6 +56,7 @@ export function SyncActiveOrganizationFromUrlToSession() {
           />
         </div>
       }
+      {children}
     </>
   )
 }

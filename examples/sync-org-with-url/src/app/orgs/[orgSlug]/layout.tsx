@@ -26,7 +26,7 @@ export default function Layout({
   const { orgSlug } = useAuth();
   return (
   <div>
-    <SyncActiveOrganizationFromUrlToSession/>
+    <SyncActiveOrganizationFromUrlToSession>
     <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 lg:block">
         <div className="flex flex-col gap-2">
@@ -120,6 +120,7 @@ export default function Layout({
       </div>
     </section>
     <div/>
+    </SyncActiveOrganizationFromUrlToSession>
   </div>
   );
 }
