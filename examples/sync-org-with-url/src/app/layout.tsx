@@ -11,7 +11,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import {SyncActiveOrganizationFromUrlToSession} from "@/app/utils/sync-active-organization-from-url-to-session";
+import {OrganizationSync} from "@/app/utils/organization-sync";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-  <ClerkProvider>
+  // <ClerkProvider clerkJSUrl={"https://localhost:4000"}>
+    <ClerkProvider>
     <html lang="en">
         <body className={inter.className}>
           <main>

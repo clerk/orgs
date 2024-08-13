@@ -6,47 +6,46 @@ import {OrganizationList, useAuth, useOrganizationList, useUser} from "@clerk/ne
 
 
 
-export function SyncActiveOrganizationFromUrlToSession(
-  { children }: { children: React.ReactNode }
+export function OrganizationSync(
+  { children, pathnameSlug }: { children: React.ReactNode, pathnameSlug: string }
 ): React.ReactElement | null {
   const { setActive, isLoaded } = useOrganizationList();
 
   // Get the organization slug from the session
-  const { orgSlug } = useAuth();
+  const {orgSlug} = useAuth();
 
   const {user} = useUser()
 
   // Get the organization slug from the URL
-  const { orgSlug: urlOrgSlug } = useParams() as { orgSlug: string };
 
   const [isMember, setIsMember] = useState(false);
 
   useLayoutEffect(() => {
     if (!isLoaded) return;
 
-    if (urlOrgSlug) {
+    if (pathnameSlug) {
       const reallyIsMember = user?.organizationMemberships?.some((mem) =>
-        mem.organization.slug === urlOrgSlug
+        mem.organization.slug === pathnameSlug
       )
       setIsMember(reallyIsMember || false);
     }
 
     // If the org slug in the URL is not the same as the org slug in the session (the active organization),
     // set the active organization to be the org from the URL.
-    if (urlOrgSlug !== orgSlug) {
+    if (pathnameSlug !== orgSlug) {
       void setActive({
-        organization: urlOrgSlug
+        organization: pathnameSlug
       });
     }
-  }, [orgSlug, isLoaded, setActive, urlOrgSlug])
+  }, [orgSlug, isLoaded, setActive, pathnameSlug])
 
-  if (urlOrgSlug !== orgSlug) {
+  if (pathnameSlug !== orgSlug) {
     return null
   }
 
   return (
     <>
-      {urlOrgSlug && !isMember &&
+      {pathnameSlug && !isMember &&
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         >

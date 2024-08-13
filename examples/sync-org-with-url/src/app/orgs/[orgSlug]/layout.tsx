@@ -11,22 +11,26 @@ import {
   SignedOut,
   UserButton, useAuth,
 } from "@clerk/nextjs";
-import {SyncActiveOrganizationFromUrlToSession} from "@/app/utils/sync-active-organization-from-url-to-session";
-import {usePathname} from "next/navigation";
+import {OrganizationSync} from "@/app/utils/organization-sync";
+import {useParams, usePathname} from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Layout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { orgSlug: string };
 }>) {
 
   const pathname = usePathname();
   const { orgSlug } = useAuth();
   return (
   <div>
-    <SyncActiveOrganizationFromUrlToSession>
+    <OrganizationSync
+      pathnameSlug={params.orgSlug}
+    >
     <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 lg:block">
         <div className="flex flex-col gap-2">
@@ -34,9 +38,10 @@ export default function Layout({
             <OrganizationSwitcher
               skipInvitationScreen={true}
               hidePersonal={true}
-              afterCreateOrganizationUrl='/orgs/:slug'
+              afterCreateOrganizationUrl='/orgs/:slug/*'
               // NOTE(izaak): the below makes sure that only the org slug component of the path switches
               // when we change URLs, and was kind of annoying to figure out, and isn't documented!
+              // afterSelectOrganizationUrl={pathname.replace(/^\/orgs\/([^\/]+)(\/.*)?$/, '/orgs/:slug$2')}
               afterSelectOrganizationUrl={pathname.replace(/^\/orgs\/([^\/]+)(\/.*)?$/, '/orgs/:slug$2')}
             />
           </div>
@@ -120,7 +125,7 @@ export default function Layout({
       </div>
     </section>
     <div/>
-    </SyncActiveOrganizationFromUrlToSession>
+    </OrganizationSync>
   </div>
   );
 }

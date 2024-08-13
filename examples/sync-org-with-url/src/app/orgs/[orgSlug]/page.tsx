@@ -5,7 +5,7 @@ export default function Home({params}):{
 } {
   const {orgSlug} = auth();
 
-  console.log("I'm the server and I got this slug: ", orgSlug);
+  // console.log("I'm the server and I got this slug: ", orgSlug);
 
   return (
    <>
