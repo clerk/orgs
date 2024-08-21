@@ -1,9 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher(["(.*)"]);
+const isOrgSlugPrefix = createRouteMatcher(["/orgs/"]);
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) auth().protect();
+}, {
+  orgSlugPrefix: isOrgSlugPrefix,
 });
 
 export const config = {
