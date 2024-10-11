@@ -50,8 +50,8 @@ export function OrganizationSync(
           className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         >
           <OrganizationList
-            afterCreateOrganizationUrl='/orgs/:slug'
-            afterSelectOrganizationUrl='/orgs/:slug'
+            afterCreateOrganizationUrl='/:slug'
+            afterSelectOrganizationUrl='/:slug'
           />
         </div>
       }
