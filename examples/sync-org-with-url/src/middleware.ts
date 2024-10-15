@@ -12,8 +12,8 @@ export default clerkMiddleware((auth, req) => {
       "/orgs/:slug/(.*)",
     ],
     personalAccountPatterns: [
-      "/personal-account",
-      "/personal-account/(.*)"
+      "/me",
+      "/me/(.*)"
     ],
   },
 });

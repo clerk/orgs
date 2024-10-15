@@ -8,7 +8,6 @@ export default function Home({params}:{
 }) {
   const authObject = auth();
   const orgSlug = authObject.orgSlug
-  console.log("this auth object", authObject)
 
   if (params.slug != orgSlug ) {
     return (

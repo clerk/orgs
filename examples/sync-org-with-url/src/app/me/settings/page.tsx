@@ -8,14 +8,13 @@ export default function Home():{} {
 
   if (orgId != null ) {
     console.log("Some org other than the personal account is active!")
-    // notFound(); // TODO(izaak): fix this
+    notFound();
   }
-
-  console.log("I'm the server and I got this auth object: ", authObject);
 
   return (
     <>
-      <p className="pb-8">Welcome to your own personal account!</p>
+      <p className="pb-8">Welcome to your own personal account settings!</p>
+      <OrganizationProfile/>
     </>
   )
 }
