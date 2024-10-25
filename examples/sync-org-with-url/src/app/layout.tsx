@@ -49,10 +49,11 @@ function LayoutContent({ children }: Readonly<{
           <div className="flex flex-col gap-2">
             <div className="flex h-[70px] items-center pl-6">
               <OrganizationSwitcher
-                skipInvitationScreen={true}
                 hidePersonal={false}
+                hideSlug={false}
                 afterCreateOrganizationUrl='/orgs/:slug'
                 afterSelectOrganizationUrl='/orgs/:slug'
+                afterSelectPersonalUrl='/me'
               />
             </div>
             <div className="flex-1">

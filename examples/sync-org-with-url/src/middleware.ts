@@ -5,18 +5,20 @@ const isProtectedRoute = createRouteMatcher(["(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) auth().protect();
-}, {
-  organizationSyncOptions: {
-    organizationPatterns: [
-      "/orgs/:slug",
-      "/orgs/:slug/(.*)",
-    ],
-    personalAccountPatterns: [
-      "/me",
-      "/me/(.*)"
-    ],
-  },
-});
+},
+  {
+    organizationSyncOptions: {
+      organizationPatterns: [
+        "/orgs/:slug",
+        "/orgs/:slug/(.*)",
+      ],
+      personalAccountPatterns: [
+        "/me",
+        "/me/(.*)"
+      ],
+    },
+  }
+);
 
 export const config = {
   matcher: [

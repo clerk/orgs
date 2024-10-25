@@ -12,8 +12,10 @@ export default function Home():{} {
   }
 
   return (
-    <>
-      <p className="pb-8">Welcome to your own personal account!</p>
-    </>
+    <div className="max-w-md mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">
+        Welcome to your personal account!
+      </h2>
+    </div>
   )
 }

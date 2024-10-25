@@ -1,8 +1,6 @@
 import { auth } from '@clerk/nextjs/server';
-import {notFound} from "next/navigation";
 import {OrganizationList} from "@clerk/nextjs";
 
-// @ts-ignore
 export default function Home({params}:{
   params: { slug: string }
 }) {
@@ -14,12 +12,24 @@ export default function Home({params}:{
       <>
         <p className="pb-8">Sorry, organization {params.slug} is not valid.</p>
         <OrganizationList
+          hidePersonal={false}
+          hideSlug={false}
+          afterCreateOrganizationUrl='/orgs/:slug'
           afterSelectOrganizationUrl='/orgs/:slug'
+          afterSelectPersonalUrl='/me'
         />
       </>
     )
   }
 
+  // The organization name was added to session claims for this application by
+  // [customizing the session token](https://clerk.com/docs/backend-requests/making/custom-session-token),
+  // using the following template:
+  // ```json
+  // {
+  //  "org_name": "{{org.name}}"
+  // }
+  // ```
   let orgName = authObject.sessionClaims['org_name'] as string
 
   return (
