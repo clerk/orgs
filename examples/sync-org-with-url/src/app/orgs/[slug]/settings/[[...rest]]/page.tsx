@@ -1,18 +1,22 @@
 "use client";
 
-import {OrganizationList, OrganizationProfile, useAuth} from "@clerk/nextjs";
+import {OrganizationList, OrganizationProfile, useOrganization} from "@clerk/nextjs";
 
 export default function Home({params}:{
   params: { slug: string }
 }) {
-  const {orgSlug} = useAuth()
+  const {organization} = useOrganization()
 
-  if (params.slug != orgSlug ) {
+  if (!organization || organization.slug != params.slug) {
     return (
       <>
         <p className="pb-8">Sorry, organization {params.slug} is not valid.</p>
         <OrganizationList
-          afterSelectOrganizationUrl='/orgs/:slug/settings'
+          hidePersonal={false}
+          hideSlug={false}
+          afterCreateOrganizationUrl='/orgs/:slug'
+          afterSelectOrganizationUrl='/orgs/:slug'
+          afterSelectPersonalUrl='/me'
         />
       </>
     )

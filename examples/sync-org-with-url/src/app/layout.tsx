@@ -42,6 +42,11 @@ function LayoutContent({ children }: Readonly<{
   const { orgSlug } = useAuth();
   const pathname = usePathname()
 
+  let prefix = "/me"
+  if (orgSlug) {
+    prefix = `/orgs/${orgSlug}`
+  }
+
   return (
     <div>
       <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
@@ -59,36 +64,36 @@ function LayoutContent({ children }: Readonly<{
             <div className="flex-1">
               <nav className="grid items-start px-4 text-sm font-medium">
                 <Link
-                  href={`/orgs/${orgSlug}`}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `/orgs/${orgSlug}` ? 'text-primary' : 'text-muted-foreground'}`}
+                  href={prefix}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === urlPrefix(orgSlug) ? 'text-primary' : 'text-muted-foreground'}`}
                   prefetch={false}
                 >
                   Home
                 </Link>
                 <Link
                   href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `/orgs/${orgSlug}/apps` ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/apps` ? 'text-primary' : 'text-muted-foreground'}`}
                   prefetch={false}
                 >
                   Apps{" "}
                 </Link>
                 <Link
                   href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `/orgs/${orgSlug}/activity` ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/activity` ? 'text-primary' : 'text-muted-foreground'}`}
                   prefetch={false}
                 >
                   Activity
                 </Link>
                 <Link
                   href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `/orgs/${orgSlug}/integrations` ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/integrations` ? 'text-primary' : 'text-muted-foreground'}`}
                   prefetch={false}
                 >
                   Integrations
                 </Link>
                 <Link
-                  href={`/orgs/${orgSlug}/settings`}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `/orgs/${orgSlug}/settings` ? 'text-primary' : 'text-muted-foreground'}`}
+                  href={`${prefix}/settings`}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/settings` ? 'text-primary' : 'text-muted-foreground'}`}
                   prefetch={false}
                 >
                   Settings
@@ -118,3 +123,9 @@ function LayoutContent({ children }: Readonly<{
   )
 }
 
+function urlPrefix(orgSlug: string | null | undefined): string {
+  if (orgSlug) {
+    return `/orgs/${orgSlug}`
+  }
+  return "/me"
+}
