@@ -20,9 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      allowedRedirectOrigins={["http://localhost:3001"]}
-    >
+    <ClerkProvider>
     <html lang="en">
         <body className={inter.className}>
           <main>
@@ -123,6 +121,11 @@ function LayoutContent({ children }: Readonly<{
   )
 }
 
+/**
+ * Gets the application-global URL prefix for the given organization slug.
+ * If the organization slug is null or undefined, returns the URL prefix for the personal account, '/me/'
+ * If the organization slug is defined, returns the URL prefix for the organization, '/orgs/:slug'
+ */
 function urlPrefix(orgSlug: string | null | undefined): string {
   if (orgSlug) {
     return `/orgs/${orgSlug}`

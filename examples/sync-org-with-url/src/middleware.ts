@@ -1,5 +1,4 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import {useRouter} from "next/navigation";
 
 const isProtectedRoute = createRouteMatcher(["(.*)"]);
 
@@ -9,12 +8,12 @@ export default clerkMiddleware((auth, req) => {
   {
     organizationSyncOptions: {
       organizationPatterns: [
-        "/orgs/:slug",
-        "/orgs/:slug/(.*)",
+        "/orgs/:slug", // Matches any organization home page, e.g. /orgs/acmecorp
+        "/orgs/:slug/(.*)", // Matches any organization sub-page, e.g. /orgs/acmecorp/settings
       ],
       personalAccountPatterns: [
-        "/me",
-        "/me/(.*)"
+        "/me", // Matches the personal account home page
+        "/me/(.*)" // Matches any personal account sub-page, e.g. /me/settings
       ],
     },
   }

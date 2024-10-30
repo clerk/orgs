@@ -5,6 +5,7 @@ export default function Home():{} {
   const authObject = auth();
 
   if (authObject.orgId != null ) {
+    console.log("Some org other than the personal account is active!")
     notFound();
   }
 
