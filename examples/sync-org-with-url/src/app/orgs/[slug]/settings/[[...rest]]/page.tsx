@@ -1,11 +1,11 @@
 "use client";
 
 import {OrganizationList, OrganizationProfile, useOrganization} from "@clerk/nextjs";
+import {useParams} from "next/navigation";
 
-export default function Home({params}:{
-  params: { slug: string }
-}) {
+export default function Home() {
   const {organization, isLoaded} = useOrganization()
+  const params = useParams()
 
   if (!isLoaded) {
     return <>Loading...</>
