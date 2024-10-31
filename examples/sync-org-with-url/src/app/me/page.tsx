@@ -1,10 +1,8 @@
 import { auth } from '@clerk/nextjs/server';
 import {notFound} from "next/navigation";
-import {OrganizationProfile} from "@clerk/nextjs";
 
-export default function Home():{} {
-  const authObject = auth();
-  const orgId = authObject.orgId
+export default async function Home():Promise<{}> {
+  const { orgId } = await auth();
 
   if (orgId != null ) {
     console.log("Some org other than the personal account is active!")
