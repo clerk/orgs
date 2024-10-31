@@ -1,10 +1,10 @@
 import { auth } from '@clerk/nextjs/server';
 import {OrganizationList} from "@clerk/nextjs";
 
-export default function Home({params}:{
+export default async function Home({params}:{
   params: { slug: string }
 }) {
-  const authObject = auth();
+  const authObject = await auth();
   const orgSlug = authObject.orgSlug
 
   if (params.slug != orgSlug ) {
