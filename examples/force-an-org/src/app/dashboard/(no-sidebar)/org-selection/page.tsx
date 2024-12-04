@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export default async function OrgSelectionPage() {
-  const { orgId } = auth();
+  const { orgId } = await auth();
 
   // Once the `orgId` is set, redirect the user. In example the user will be redirected to `/dashboard`
   if (orgId) {
