@@ -1,4 +1,4 @@
-# templates: limit-org-creation
+# limit-org-creation
 
 An example on how to use our org creation limitations to control which users can create new organizations
 
