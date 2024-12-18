@@ -2,7 +2,7 @@
 
 This example shows how to build an application where the active clerk organization is determined by a component of the URL.
 
-For more information, please see the [DX Guide: Use Organization Slugs in URLs](https://clerk.com/docs/pr/1664/organizations/org-slugs-in-urls)
+For more information, please see the [DX Guide: Use Organization Slugs in URLs](https://clerk.com/docs/organizations/org-slugs-in-urls)
 
 ## Set Up
 
