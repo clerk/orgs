@@ -55,7 +55,7 @@ export default function Dashboard() {
             {user?.createOrganizationEnabled ? "allowed" : "not allowed"}
           </strong>{" "}
           to create organizations. Limit is set to{" "}
-          <strong>{user?.createOrganizationsLimit}</strong>
+          <strong>{user?.createOrganizationsLimit || "unlimited"}</strong>
         </p>
         <div className="mt-8">
           <p>There are a few ways to test this functionality:</p>
