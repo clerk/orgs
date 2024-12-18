@@ -1,6 +1,8 @@
 # templates: limit-org-creation
 
-An example on how to use our org creation limitations to control which users can create new organizations
+An example on how to use our org creation limitations to control which users can create new organizations.
+
+These limits can be configured in [Organization Settings](https://dashboard.clerk.com/last-active?path=organizations-settings) -> Limit Creation in the Clerk Dashboard.
 
 ## Includes
 
