@@ -3,6 +3,7 @@ import { auth, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+  const bapiClient = await clerkClient();
   const { userId, sessionClaims } = await auth();
 
   if (!userId) {
@@ -21,18 +22,6 @@ export async function POST(req: Request) {
   }
 
   const currentPendingSteps = sessionClaims?.metadata?.pending_steps;
-
-  if (!currentPendingSteps?.length) {
-    return NextResponse.json(
-      {
-        error:
-          "User has completed onboarding, therefore no pending steps to complete",
-      },
-      { status: 422 }
-    );
-  }
-
-  const bapiClient = await clerkClient();
 
   try {
     await bapiClient.users.updateUser(userId, {

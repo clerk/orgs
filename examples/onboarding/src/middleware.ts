@@ -7,18 +7,13 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { ONBOARDING_STEPS } from "./types/onboarding";
 
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/onboarding(.*)",
+]);
 
 export default clerkMiddleware(async (auth, request) => {
   const authObject = await auth();
-
-  // Seed onboarding steps once the user authenticates
-  await seedOnboardingSteps(authObject);
-
-  // If the user is not authenticated and the route is protected, redirect to sign-in/sign-up
-  if (isProtectedRoute(request)) {
-    await auth.protect();
-  }
 
   // Verify if there are pending onboarding steps and return where to redirect
   const onboardingStepUrl = await getPendingOnboardingStepUrl(
@@ -29,6 +24,24 @@ export default clerkMiddleware(async (auth, request) => {
   // Redirects to onboarding step
   if (onboardingStepUrl) {
     return NextResponse.redirect(onboardingStepUrl);
+  }
+
+  // If all steps got completed, navigate to dashboard
+  const hasCompletedOnboarding =
+    request.url.includes("onboarding") &&
+    !authObject?.sessionClaims?.metadata?.pending_steps?.length;
+  console.log(authObject?.sessionClaims?.metadata);
+  if (hasCompletedOnboarding) {
+    const dashboardUrl = new URL("/dashboard", request.url);
+    return NextResponse.redirect(dashboardUrl);
+  }
+
+  // Seed onboarding steps once the user authenticates
+  await seedOnboardingSteps(authObject);
+
+  // If the user is not authenticated and the route is protected, redirect to sign-in/sign-up
+  if (isProtectedRoute(request)) {
+    await auth.protect();
   }
 
   return NextResponse.next();
@@ -50,11 +63,13 @@ async function seedOnboardingSteps(authObject: ClerkMiddlewareAuthObject) {
   const bapiClient = await clerkClient();
 
   try {
-    await bapiClient.users.updateUser(authObject.userId, {
+    const response = await bapiClient.users.updateUser(authObject.userId, {
       publicMetadata: {
         pending_steps: ONBOARDING_STEPS,
       },
     });
+
+    return response.publicMetadata;
   } catch (error) {
     console.log("Failed to seed onboarding steps: ", error);
   }
@@ -64,13 +79,14 @@ async function getPendingOnboardingStepUrl(
   authObject: ClerkMiddlewareAuthObject,
   request: NextRequest
 ) {
-  const pendingSteps = authObject.sessionClaims?.metadata?.pending_steps;
-
-  if (!Array.isArray(pendingSteps)) {
+  // If there's not a user session, proceed with request
+  if (!authObject.userId) {
     return;
   }
 
-  const [step] = pendingSteps;
+  // Defaults to hardcoded array of steps on the first request, since seeding might not have been executed yet
+  const pendingSteps = authObject.sessionClaims?.metadata?.pending_steps;
+  const [step] = pendingSteps ?? ONBOARDING_STEPS;
 
   // All steps got completed, allowing request to proceed
   if (!step) {
@@ -81,7 +97,7 @@ async function getPendingOnboardingStepUrl(
   const isOnCurrentOnboardingStep = request.url === onboardingStepUrl.href;
   const isOnboardingAPIRequest = request.url.includes("api");
 
-  // Is currently on the onboarding step, let the request proceed
+  // If it's currently on the onboarding step, let the request proceed
   if (isOnboardingAPIRequest || isOnCurrentOnboardingStep) {
     return;
   }

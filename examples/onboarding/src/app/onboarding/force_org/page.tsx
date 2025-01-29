@@ -1,9 +1,11 @@
 "use client";
 
+import { OnboardingStep } from "@/types/onboarding";
 import { OrganizationList, useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-async function completeForceOrgOnboardingStep() {
+async function completeOnboardingStep() {
   try {
     const response = await fetch("/api/onboarding/complete-step", {
       method: "POST",
@@ -11,7 +13,7 @@ async function completeForceOrgOnboardingStep() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        step: "force_org",
+        step: "force_org" satisfies OnboardingStep,
       }),
     });
 
@@ -25,25 +27,28 @@ async function completeForceOrgOnboardingStep() {
 
 export default function ForceOrgOnboardingStep() {
   const { orgId } = useAuth();
-  const [isUpdatingOnboardingStep, setIsUpdatingOnboardingStep] =
+  const [isCompletingOnboardingStep, setIsCompletingOnboardingStep] =
     useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (!orgId) {
       return;
     }
 
-    setIsUpdatingOnboardingStep(true);
+    setIsCompletingOnboardingStep(true);
 
-    completeForceOrgOnboardingStep().finally(() =>
-      setIsUpdatingOnboardingStep(false)
-    );
-  }, [orgId]);
+    completeOnboardingStep()
+      .then(() => {
+        router.push("/accept_tos");
+      })
+      .finally(() => setIsCompletingOnboardingStep(false));
+  }, [router, orgId]);
 
   return (
     <div className="w-full h-full grid place-content-center">
       <div className="flex flex-col items-center justify-center space-y-4 text-center">
-        {isUpdatingOnboardingStep ? (
+        {orgId && isCompletingOnboardingStep ? (
           <p>Proceeding to next step...</p>
         ) : (
           <>
