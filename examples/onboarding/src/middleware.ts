@@ -79,9 +79,10 @@ async function getPendingOnboardingStepUrl(
 
   const onboardingStepUrl = new URL(`/onboarding/${step}`, request.url);
   const isOnCurrentOnboardingStep = request.url === onboardingStepUrl.href;
+  const isOnboardingAPIRequest = request.url.includes("api");
 
   // Is currently on the onboarding step, let the request proceed
-  if (isOnCurrentOnboardingStep) {
+  if (isOnboardingAPIRequest || isOnCurrentOnboardingStep) {
     return;
   }
 
