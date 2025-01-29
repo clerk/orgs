@@ -5,3 +5,7 @@ export type OnboardingStep = (typeof ONBOARDING_STEPS)[number];
 export const isOnboardingStep = (step: string): step is OnboardingStep => {
   return ONBOARDING_STEPS.includes(step as OnboardingStep);
 };
+
+export const hasCompletedOnboardingSteps = (currentSteps: OnboardingStep[]) => {
+  return currentSteps.length === ONBOARDING_STEPS.length;
+};

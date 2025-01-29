@@ -2,6 +2,9 @@ import { isOnboardingStep } from "@/types/onboarding";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+/**
+ * API endpoint to update onboarding steps
+ */
 export async function POST(req: Request) {
   const bapiClient = await clerkClient();
   const { userId, sessionClaims } = await auth();
@@ -21,12 +24,17 @@ export async function POST(req: Request) {
     );
   }
 
-  const currentPendingSteps = sessionClaims?.metadata?.pending_steps;
+  if (sessionClaims.metadata?.completed_steps?.includes(step)) {
+    return Response.json({ step });
+  }
 
   try {
     await bapiClient.users.updateUser(userId, {
       publicMetadata: {
-        pending_steps: currentPendingSteps.filter((v) => v != step),
+        completed_steps: [
+          ...(sessionClaims?.metadata?.completed_steps ?? []),
+          step,
+        ],
       },
     });
   } catch (error) {

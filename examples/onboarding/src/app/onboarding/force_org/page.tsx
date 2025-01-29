@@ -1,34 +1,13 @@
 "use client";
 
-import { OnboardingStep } from "@/types/onboarding";
+import { useCompleteOnboardingStep } from "@/lib/hooks";
 import { OrganizationList, useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-async function completeOnboardingStep() {
-  try {
-    const response = await fetch("/api/onboarding/complete-step", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        step: "force_org" satisfies OnboardingStep,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to update onboarding step");
-    }
-  } catch (error) {
-    console.error("Error updating onboarding:", error);
-  }
-}
-
-export default function ForceOrgOnboardingStep() {
+export default function ForceOrgOnboardingStepPage() {
+  const { mutate, isLoading } = useCompleteOnboardingStep();
   const { orgId } = useAuth();
-  const [isCompletingOnboardingStep, setIsCompletingOnboardingStep] =
-    useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -36,19 +15,13 @@ export default function ForceOrgOnboardingStep() {
       return;
     }
 
-    setIsCompletingOnboardingStep(true);
-
-    completeOnboardingStep()
-      .then(() => {
-        router.push("/accept_tos");
-      })
-      .finally(() => setIsCompletingOnboardingStep(false));
-  }, [router, orgId]);
+    mutate("force_org").then(() => router.push(`/onboarding/accept_tos`));
+  }, [mutate, router, orgId]);
 
   return (
     <div className="w-full h-full grid place-content-center">
       <div className="flex flex-col items-center justify-center space-y-4 text-center">
-        {orgId && isCompletingOnboardingStep ? (
+        {orgId && isLoading ? (
           <p>Proceeding to next step...</p>
         ) : (
           <>

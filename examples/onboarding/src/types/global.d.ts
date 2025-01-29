@@ -5,7 +5,7 @@ export {};
 declare global {
   interface CustomJwtSessionClaims {
     metadata: {
-      pending_steps: OnboardingStep[];
+      completed_steps: OnboardingStep[];
     };
   }
 }
