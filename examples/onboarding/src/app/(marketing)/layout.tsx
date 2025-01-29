@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { SignedOut, SignedIn, UserButton, SignInButton } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
 
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
