@@ -8,14 +8,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
       <div className="hidden border-r bg-muted/40 lg:block">
         <div className="flex flex-col gap-2">
           <div className="flex h-[70px] items-center pl-6">
-            <OrganizationSwitcher
-              // hide the personal workspace option from your users.
-              // to test your middleware, set hidePersonal to false and select your Personal Workspace
-              // you should get redirected to the /org-selection route
-              hidePersonal={false}
-              skipInvitationScreen={true}
-              afterCreateOrganizationUrl="/dashboard"
-            />
+            <OrganizationSwitcher />
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-4 text-sm font-medium">
