@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
       <div className="hidden border-r bg-muted/40 lg:block">
         <div className="flex flex-col gap-2">
           <div className="flex h-[70px] items-center pl-6">
-            <OrganizationSwitcher />
+            <OrganizationSwitcher afterCreateOrganizationUrl="/dashboard" />
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-4 text-sm font-medium">

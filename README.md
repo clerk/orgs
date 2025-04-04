@@ -15,6 +15,8 @@ And when you model your B2B Application's customers as Orgs, you can begin to cu
 
 ### Examples
 
+### Using `@clerk/nextjs`
+
 - [Organization Creation Limitations](examples/limit-org-creation/)
 - [Force an Organization](examples/force-an-org/)
 - [Sync an Active Organization from a URL](examples/sync-org-with-url/)
