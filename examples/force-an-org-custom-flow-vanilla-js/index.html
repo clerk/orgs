@@ -9,8 +9,46 @@
 </head>
 
 <body>
-  <div id="app"></div>
-  <script type="module" src="./src/main.js"></script>
+  <div id="signed-in"></div>
+
+  <div id="sign-up">
+    <h2>Sign up</h2>
+    <form id="sign-up-form">
+      <label for="email">Enter email address</label>
+      <input type="email" name="email" id="sign-up-email" />
+      <label for="password">Enter password</label>
+      <input type="password" name="password" id="sign-up-password" />
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+
+  <div id="sign-in">
+    <h2>Sign in</h2>
+    <form id="sign-in-form">
+      <label for="email">Enter email address</label>
+      <input name="email" id="sign-in-email" />
+      <label for="password">Enter password</label>
+      <input name="password" id="sign-in-password" />
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+
+  <form id="verifying" hidden>
+    <h2>Verify your account</h2>
+    <label for="totp">Enter your code</label>
+    <input id="totp" name="code" />
+    <label for="backupCode">This code is a backup code</label>
+    <input type="checkbox" id="backupCode" name="backupCode" />
+    <button type="submit" id="verify-button">Verify</button>
+  </form>
+
+  <form id="create-organization" hidden>
+    <label for="name">Name</label>
+    <input id="name" name="name" />
+    <button>Create organization</button>
+  </form>
+
+  <script type="module" src="/src/main.js" async crossorigin="anonymous"></script>
 </body>
 
 </html>
