@@ -7,7 +7,7 @@ export default function HomePage() {
       <h1 className="text-3xl font-bold">Home</h1>
       <p className="font-xs font-mono">This is your marketing homepage</p>
       <p className="font-xs font-mono">
-        This page is visible even when you're signed out
+        This page is visible even when you&apos;re signed out
       </p>
 
       <p>

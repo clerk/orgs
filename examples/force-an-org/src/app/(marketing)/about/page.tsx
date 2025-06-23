@@ -6,7 +6,7 @@ export default function AboutPage() {
         This is a regular static page of your marketing site
       </p>
       <p className="font-xs font-mono">
-        This page is visible even when you're signed out
+        This page is visible even when you&apos;re signed out
       </p>
 
       <p>

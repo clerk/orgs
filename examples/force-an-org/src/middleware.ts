@@ -1,37 +1,21 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
+// Matches routes that enforce organization selection
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
-export default clerkMiddleware(async (auth, req) => {
+export default clerkMiddleware(
+  async (auth, req) => {
+    if (isProtectedRoute(req)) {
+      await auth.protect();
+    }
 
-  // Check if the user is signed in and does not have an auth().orgId
-  // If true, then redirect them to the organization selection route
-  // Include their current route as a redirect_url, which will be handled on the route
-  const orgSelectionPath = "/dashboard/org-selection";
-
-  const {userId, orgId, redirectToSignIn} = await auth();
-
-  // if there's not an active org selected, redirect to the org-selection view
-  if (
-    userId &&
-    !orgId &&
-    req.nextUrl.pathname !== orgSelectionPath
-  ) {
-    console.log("Triggering...")
-    const orgListUrl = new URL(orgSelectionPath, req.url);
-    return NextResponse.redirect(orgListUrl);
+    return NextResponse.next();
+  },
+  {
+    signInUrl: "/sign-in",
   }
-
-  if (isProtectedRoute(req)) await auth.protect();
-
-  // If the user isn't signed in and the route is private, redirect to sign-in
-  if (!userId && isProtectedRoute(req))
-    return redirectToSignIn({ returnBackUrl: req.url });
-
-  // If the user is logged in and the route is protected, let them view.
-  if (userId && isProtectedRoute(req)) return NextResponse.next();
-});
+);
 
 export const config = {
   matcher: [
