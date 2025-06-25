@@ -3,7 +3,10 @@
 This example shows how to build an application that does not allow users to operate under a _Personal Workspace_. To require organization membership for all users:
 1. Navigate to **Organization Settings** page in the Clerk Dashboard
 2. Enable the organizations feature if not already active
-3. Turn on **Force organization selection**
+3. Turn off **Allow personal workspace**
+
+# TODO -> Add docs here once it's shipped
+Also, refer to the [documentation]() for more detail information around SDK references.
 
 ## Set Up
 
