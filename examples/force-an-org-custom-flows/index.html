@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clerk - Force an Org</title>
+</head>
+
+<body>
+  <div id="app">
+    <div id="loading">Loading...</div>
+    <div id="auth-container" style="display: none;">
+      <div id="sign-in">
+        <h2>Sign in</h2>
+        <form id="sign-in-form">
+          <label for="email">Enter email address</label>
+          <input type="email" name="email" id="sign-in-email" />
+          <label for="password">Enter password</label>
+          <input type="password" name="password" id="sign-in-password" />
+          <button type="submit">Continue</button>
+        </form>
+        <div class="auth-toggle">
+          <button id="toggle-to-sign-up">Don't have an account? Sign up</button>
+        </div>
+      </div>
+      <div id="sign-up" style="display: none;">
+        <h2>Sign up</h2>
+        <form id="sign-up-form">
+          <label for="email">Enter email address</label>
+          <input type="email" name="email" id="sign-up-email" />
+          <label for="password">Enter password</label>
+          <input type="password" name="password" id="sign-up-password" />
+          <button type="submit">Continue</button>
+        </form>
+        <div class="auth-toggle">
+          <button id="toggle-to-sign-in">Already have an account? Sign in</button>
+        </div>
+      </div>
+      <div id="org-creation" style="display: none;">
+        <h2>Create Organization</h2>
+        <form id="org-creation-form">
+          <label for="org-name">Organization Name</label>
+          <input type="text" name="org-name" id="org-name" required />
+          <button type="submit">Create Organization</button>
+        </form>
+      </div>
+    </div>
+    <div id="dashboard" style="display: none;">
+      <h1>Dashboard</h1>
+      <div id="user-info"></div>
+      <div id="org-info"></div>
+      <button id="sign-out-btn">Sign Out</button>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
