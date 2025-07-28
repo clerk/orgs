@@ -1,9 +1,10 @@
 # force-an-org
 
-This example shows how to build an application that does not allow users to operate under a _Personal Workspace_. To require organization membership for all users:
+This example shows how to build an application that does not allow users to operate under a _Personal Account_. To require organization membership for all users:
 1. Navigate to **Organization Settings** page in the Clerk Dashboard
 2. Enable the organizations feature if not already active
-3. Turn on **Force organization selection**
+3. The **Allow personal account** option will be enabled by default
+   1. Personal accounts being disabled by default was released on \[RELEASE DATE]. Applications created before this date will not be able to see the **Allow personal accounts** setting, because personal workspaces were enabled by default.
 
 ## Set Up
 
