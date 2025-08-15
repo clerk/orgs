@@ -1,4 +1,4 @@
-# force-an-org
+# Disable Personal Accounts
 
 This example shows how to build an application that does not allow users to operate under a _Personal Account_. To require organization membership for all users:
 1. Navigate to **Organization Settings** page in the Clerk Dashboard
