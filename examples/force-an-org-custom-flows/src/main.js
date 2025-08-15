@@ -24,7 +24,7 @@ async function handleAfterAuth() {
   signInEl.style.display = "none";
   signUpEl.style.display = "none";
 
-  if (clerk.session.currentTask.key === "org") {
+  if (clerk.session.currentTask.key === "choose-organization") {
     showOrgCreation();
   }
 }
@@ -32,9 +32,9 @@ async function handleAfterAuth() {
 // Show authentication UI
 function showAuth() {
   loadingEl.style.display = "none";
-  authContainerEl.style.display = "block";
   dashboardEl.style.display = "none";
   orgCreationEl.style.display = "none";
+  authContainerEl.style.display = "block";
 
   // Show sign-in by default
   showSignIn();
@@ -42,8 +42,9 @@ function showAuth() {
 
 // Show sign-in form
 function showSignIn() {
-  signInEl.style.display = "block";
+  loadingEl.style.display = "none";
   signUpEl.style.display = "none";
+  signInEl.style.display = "block";
   orgCreationEl.style.display = "none";
 }
 
@@ -114,7 +115,9 @@ async function handleSignIn(e) {
     });
 
     if (signInAttempt.status === "complete") {
-      await clerk.setActive({ session: signInAttempt.createdSessionId });
+      await clerk.setActive({
+        session: signInAttempt.createdSessionId,
+      });
     } else {
       console.error(JSON.stringify(signInAttempt, null, 2));
     }
