@@ -9,7 +9,7 @@ And when you model your B2B Application's customers as Orgs, you can begin to cu
 - Roles and Permissions
 - Verified Domains and Enrollment Modes
 - Invitations
-- Easy context shifting in your app via the `<OrgSwitcher />` component
+- Easy context shifting in your app via the `<OrganizationSwitcher />` component
 - Organization Metadata
 - Customizable Enterprise-grade SSO for each of your customers
 
@@ -17,9 +17,9 @@ And when you model your B2B Application's customers as Orgs, you can begin to cu
 
 ### Using `@clerk/nextjs`
 
-- [Organization Creation Limitations](examples/limit-org-creation/)
-- [Force an Organization](examples/force-an-org/)
+- [Disable Personal Account](examples/disable-personal-account-with-nextjs/)
 - [Sync an Active Organization from a URL](examples/sync-org-with-url/)
+- [Organization Creation Limitations](examples/limit-org-creation/)
 
 ### To bootstrap a new example project
 
