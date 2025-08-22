@@ -57,8 +57,6 @@ function showSignUp() {
 
 // Show organization creation form
 function showOrgCreation() {
-  console.log("show org creation");
-
   signInEl.style.display = "none";
   signUpEl.style.display = "none";
   orgCreationEl.style.display = "block";
