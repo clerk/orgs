@@ -19,17 +19,16 @@ import "./style.css";
 
 const clerk = new Clerk(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
-// After-auth custom flow handler
-async function handleAfterAuth() {
+// Custom flow handler
+async function showTask() {
   signInEl.style.display = "none";
   signUpEl.style.display = "none";
 
   if (clerk.session.currentTask.key === "choose-organization") {
-    showOrgCreation();
+    showChooseOrganization();
   }
 }
 
-// Show authentication UI
 function showAuth() {
   loadingEl.style.display = "none";
   dashboardEl.style.display = "none";
@@ -40,7 +39,6 @@ function showAuth() {
   showSignIn();
 }
 
-// Show sign-in form
 function showSignIn() {
   loadingEl.style.display = "none";
   signUpEl.style.display = "none";
@@ -48,15 +46,13 @@ function showSignIn() {
   orgCreationEl.style.display = "none";
 }
 
-// Show sign-up form
 function showSignUp() {
   signInEl.style.display = "none";
   signUpEl.style.display = "block";
   orgCreationEl.style.display = "none";
 }
 
-// Show organization creation form
-function showOrgCreation() {
+function showChooseOrganization() {
   signInEl.style.display = "none";
   signUpEl.style.display = "none";
   orgCreationEl.style.display = "block";
@@ -65,7 +61,6 @@ function showOrgCreation() {
   loadingEl.style.display = "none";
 }
 
-// Show dashboard
 function showDashboard() {
   loadingEl.style.display = "none";
   authContainerEl.style.display = "none";
@@ -75,7 +70,6 @@ function showDashboard() {
   updateOrgInfo();
 }
 
-// Update user information display
 function updateUserInfo() {
   const user = clerk.user;
   if (user) {
@@ -87,7 +81,6 @@ function updateUserInfo() {
   }
 }
 
-// Update organization information display
 async function updateOrgInfo() {
   const activeOrg = clerk.organization;
   if (activeOrg) {
@@ -193,7 +186,7 @@ async function init() {
       }
 
       if (session?.currentTask) {
-        return handleAfterAuth();
+        return showTask();
       }
 
       return showAuth();
