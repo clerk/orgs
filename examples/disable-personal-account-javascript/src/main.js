@@ -70,12 +70,21 @@ function showDashboard() {
   updateOrgInfo();
 }
 
+function escapeHtml(str) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+};
+
 function updateUserInfo() {
   const user = clerk.user;
   if (user) {
     userInfoEl.innerHTML = `
       <h2>User Information</h2>
-      <p><strong>Email:</strong> ${user.primaryEmailAddress.emailAddress}</p>
+      <p><strong>Email:</strong> ${escapeHtml(user.primaryEmailAddress.emailAddress)}</p>
       <p><strong>User ID:</strong> ${user.id}</p>
     `;
   }
