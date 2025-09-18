@@ -17,7 +17,8 @@ And when you model your B2B Application's customers as Orgs, you can begin to cu
 
 ### Using `@clerk/nextjs`
 
-- [Disable Personal Account](examples/disable-personal-account-with-nextjs/)
+- [Disable Personal Account - JS](examples/disable-personal-account-javascript/)
+- [Disable Personal Account - Next.js](examples/disable-personal-account-nextjs/)
 - [Sync an Active Organization from a URL](examples/sync-org-with-url/)
 - [Organization Creation Limitations](examples/limit-org-creation/)
 
