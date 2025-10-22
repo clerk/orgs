@@ -40,10 +40,15 @@ body {
   color: #64748b;
 }
 
-#auth-container,
-#dashboard {
+#auth-container {
   width: 100%;
   max-width: 400px;
+  margin: 0 auto;
+}
+
+#dashboard {
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -127,11 +132,38 @@ button:disabled {
 #org-info {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem 0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 0;
   text-align: left;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  flex: 1;
+  min-width: 300px;
+  min-height: 200px;
+}
+
+/* Container for user and org info cards */
+#user-info {
+  margin-right: 0;
+}
+
+#org-info {
+  margin-left: 0;
+}
+
+/* Dashboard layout for side-by-side cards */
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#info-cards {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  gap: 1.5rem;
+  margin: 2rem auto;
 }
 
 #user-info p,
@@ -162,6 +194,30 @@ button:disabled {
   background: #dc2626;
   transform: translateY(-1px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Error message styling */
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Success message styling */
+.success-message {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: left;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -210,5 +266,35 @@ button:disabled {
   #user-info strong,
   #org-info strong {
     color: #60a5fa;
+  }
+
+  .error-message {
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #fca5a5;
+  }
+
+  .success-message {
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #86efac;
+  }
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  #info-cards {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  #user-info {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  #org-info {
+    margin-left: 0;
+    margin-top: 0.5rem;
   }
 }

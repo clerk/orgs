@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://clerk.accounts.dev https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https://clerk.accounts.dev https://challenges.cloudflare.com https://*.clerk.accounts.dev; frame-src 'self' https://clerk.accounts.dev https://challenges.cloudflare.com; worker-src 'self' blob:; child-src 'self' blob:;" />
   <title>Clerk - Force an Org</title>
 </head>
 
@@ -14,6 +15,7 @@
     <div id="auth-container" style="display: none;">
       <div id="sign-in">
         <h2>Sign in</h2>
+        <div id="sign-in-error" class="error-message" style="display: none;"></div>
         <form id="sign-in-form">
           <label for="email">Enter email address</label>
           <input type="email" name="email" id="sign-in-email" />
@@ -27,19 +29,37 @@
       </div>
       <div id="sign-up" style="display: none;">
         <h2>Sign up</h2>
+        <div id="sign-up-error" class="error-message" style="display: none;"></div>
         <form id="sign-up-form">
           <label for="email">Enter email address</label>
           <input type="email" name="email" id="sign-up-email" />
           <label for="password">Enter password</label>
-          <input type="password" name="password" id="sign-up-password" />
+          <input type="password" name="password" id="sign-up-password" minlength="8" required />
+          <div id="clerk-captcha"></div>
           <button type="submit">Continue</button>
         </form>
         <div class="auth-toggle">
           <button id="toggle-to-sign-in">Already have an account? Sign in</button>
         </div>
       </div>
+      <div id="email-verification" style="display: none;">
+        <h2>Verify Your Email</h2>
+        <div id="email-verification-error" class="error-message" style="display: none;"></div>
+        <div id="email-verification-success" class="success-message" style="display: none;"></div>
+        <p>We sent a verification code to your email address. Please enter it below to complete your sign up.</p>
+        <form id="email-verification-form">
+          <label for="verification-code">Verification Code</label>
+          <input type="text" name="verification-code" id="verification-code" placeholder="Enter 6-digit code" maxlength="6" required />
+          <button type="submit">Verify Email</button>
+        </form>
+        <div class="auth-toggle">
+          <button id="resend-verification">Resend Code</button>
+          <button id="back-to-sign-up">Back to Sign Up</button>
+        </div>
+      </div>
       <div id="org-creation" style="display: none;">
         <h2>Create Organization</h2>
+        <div id="org-creation-error" class="error-message" style="display: none;"></div>
         <form id="org-creation-form">
           <label for="org-name">Organization Name</label>
           <input type="text" name="org-name" id="org-name" required />
@@ -49,8 +69,10 @@
     </div>
     <div id="dashboard" style="display: none;">
       <h1>Dashboard</h1>
-      <div id="user-info"></div>
-      <div id="org-info"></div>
+      <div id="info-cards">
+        <div id="user-info"></div>
+        <div id="org-info"></div>
+      </div>
       <button id="sign-out-btn">Sign Out</button>
     </div>
   </div>
