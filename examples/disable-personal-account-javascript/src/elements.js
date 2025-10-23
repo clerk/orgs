@@ -13,8 +13,11 @@ const userInfoEl = document.getElementById("user-info");
 const orgInfoEl = document.getElementById("org-info");
 const signOutBtn = document.getElementById("sign-out-btn");
 const signInErrorEl = document.getElementById("sign-in-error");
+const signInSuccessEl = document.getElementById("sign-in-success");
 const signUpErrorEl = document.getElementById("sign-up-error");
+const signUpSuccessEl = document.getElementById("sign-up-success");
 const orgCreationErrorEl = document.getElementById("org-creation-error");
+const orgCreationSuccessEl = document.getElementById("org-creation-success");
 const emailVerificationEl = document.getElementById("email-verification");
 const emailVerificationForm = document.getElementById("email-verification-form");
 const emailVerificationErrorEl = document.getElementById("email-verification-error");
@@ -34,15 +37,18 @@ export {
   orgCreationEl,
   orgCreationForm,
   orgCreationErrorEl,
+  orgCreationSuccessEl,
   orgInfoEl,
   resendVerificationBtn,
   signInEl,
   signInForm,
   signInErrorEl,
+  signInSuccessEl,
   signOutBtn,
   signUpEl,
   signUpForm,
   signUpErrorEl,
+  signUpSuccessEl,
   toggleToSignInBtn,
   toggleToSignUpBtn,
   userInfoEl,

@@ -11,15 +11,18 @@ import {
   orgCreationEl,
   orgCreationForm,
   orgCreationErrorEl,
+  orgCreationSuccessEl,
   orgInfoEl,
   resendVerificationBtn,
   signInEl,
   signInForm,
   signInErrorEl,
+  signInSuccessEl,
   signOutBtn,
   signUpEl,
   signUpForm,
   signUpErrorEl,
+  signUpSuccessEl,
   toggleToSignInBtn,
   toggleToSignUpBtn,
   userInfoEl,
@@ -27,9 +30,6 @@ import {
 import "./style.css";
 
 const clerk = new Clerk(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
-
-// Store current sign-up attempt for verification
-let currentSignUpAttempt = null;
 
 // Custom flow handler
 async function showTask() {
@@ -93,9 +93,9 @@ function showEmailVerification() {
   dashboardEl.style.display = "none";
   loadingEl.style.display = "none";
   
-  // Clear any existing errors
+  // Clear any existing errors and success messages
   hideError(emailVerificationErrorEl);
-  hideError(emailVerificationSuccessEl);
+  hideSuccess(emailVerificationSuccessEl);
 }
 
 function showChooseOrganization() {
@@ -114,7 +114,6 @@ function showDashboard() {
 
   // Clear any verification form when showing dashboard
   emailVerificationEl.style.display = "none";
-  currentSignUpAttempt = null;
 
   updateUserInfo();
   updateOrgInfo();
@@ -134,16 +133,28 @@ function showError(errorEl, message) {
   errorEl.style.display = "block";
 }
 
+function showSuccess(successEl, message) {
+  successEl.textContent = message;
+  successEl.style.display = "block";
+}
+
 function hideError(errorEl) {
   errorEl.style.display = "none";
 }
 
+function hideSuccess(successEl) {
+  successEl.style.display = "none";
+}
+
 function clearAllErrors() {
   hideError(signInErrorEl);
+  hideSuccess(signInSuccessEl);
   hideError(signUpErrorEl);
+  hideSuccess(signUpSuccessEl);
   hideError(orgCreationErrorEl);
+  hideSuccess(orgCreationSuccessEl);
   hideError(emailVerificationErrorEl);
-  hideError(emailVerificationSuccessEl);
+  hideSuccess(emailVerificationSuccessEl);
 }
 
 function updateUserInfo() {
@@ -159,7 +170,6 @@ function updateUserInfo() {
 
 async function updateOrgInfo() {
   const activeOrg = clerk.organization;
-  console.log("activeOrg", activeOrg);
   if (activeOrg) {
     orgInfoEl.innerHTML = `
       <h2>Active Organization</h2>
@@ -230,12 +240,6 @@ async function handleSignUp(e) {
     if (signUpAttempt.status === "complete") {
       await clerk.setActive({ session: signUpAttempt.createdSessionId });
     } else if (signUpAttempt.status === "missing_requirements") {
-      // Handle missing requirements (like email verification)
-      console.log("Sign up requires email verification:", signUpAttempt);
-      
-      // Store the sign-up attempt for verification
-      currentSignUpAttempt = signUpAttempt;
-      
       // Trigger email verification
       try {
         await signUpAttempt.prepareEmailAddressVerification({
@@ -286,22 +290,22 @@ async function handleEmailVerification(e) {
   // Clear any existing error
   hideError(emailVerificationErrorEl);
 
-  if (!currentSignUpAttempt) {
+  if (!clerk.client.signUp) {
     showError(emailVerificationErrorEl, "No verification session found. Please sign up again.");
     return;
   }
 
   try {
-    const verificationAttempt = await currentSignUpAttempt.attemptEmailAddressVerification({
+    const verificationAttempt = await clerk.client.signUp.attemptEmailAddressVerification({
       code: verificationCode,
     });
 
     if (verificationAttempt.status === "complete") {
       // Verification successful
-      showError(emailVerificationSuccessEl, "Email verified successfully! Redirecting...");
+      showSuccess(emailVerificationSuccessEl, "Email verified successfully! Redirecting...");
       await clerk.setActive({ session: verificationAttempt.createdSessionId });
       // Clear the success message after redirect
-      hideError(emailVerificationSuccessEl);
+      hideSuccess(emailVerificationSuccessEl);
     } else {
       showError(emailVerificationErrorEl, "Invalid verification code. Please try again.");
     }
@@ -320,16 +324,16 @@ async function handleEmailVerification(e) {
 }
 
 async function handleResendVerification() {
-  if (!currentSignUpAttempt) {
+  if (!clerk.client.signUp) {
     showError(emailVerificationErrorEl, "No verification session found. Please sign up again.");
     return;
   }
 
   try {
-    await currentSignUpAttempt.prepareEmailAddressVerification({
+    await clerk.client.signUp.prepareEmailAddressVerification({
       strategy: "email_code"
     });
-    showError(emailVerificationSuccessEl, "Verification code sent! Please check your email.");
+    showSuccess(emailVerificationSuccessEl, "Verification code sent! Please check your email.");
   } catch (error) {
     console.error("Failed to resend verification:", error);
     showError(emailVerificationErrorEl, "Failed to resend verification code. Please try again.");
