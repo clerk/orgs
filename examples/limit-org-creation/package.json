@@ -9,14 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.31.2",
+    "@clerk/nextjs": "^6.34.3",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cross-spawn": "^7.0.6",
     "lucide-react": "^0.465.0",
     "micromatch": "4.0.8",
-    "next": "15.0.3",
+    "next": "^15.5.6",
     "react": "^18",
     "react-dom": "^18",
     "sonner": "^1.7.0",
