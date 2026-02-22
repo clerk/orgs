@@ -16,7 +16,7 @@
     "cross-spawn": "^7.0.6",
     "lucide-react": "^0.465.0",
     "micromatch": "4.0.8",
-    "next": "^15.5.9",
+    "next": "^15.5.10",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "sonner": "^1.7.0",
