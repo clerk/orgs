@@ -7,8 +7,7 @@ import {
   ClerkProvider,
   OrganizationSwitcher,
   SignInButton,
-  SignedIn,
-  SignedOut,
+  Show,
   UserButton,
 } from "@clerk/nextjs";
 
@@ -25,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <ClerkProvider>
           <main>
             <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
               <div className="hidden border-r bg-muted/40 lg:block">
@@ -101,15 +100,15 @@ export default function RootLayout({
                 <div className="text-lg font-medium">
                   Orgs: {"<Name of Example>"}
                 </div>
-                <SignedOut>
+                <Show when="signed-out">
                   <SignInButton>
                     <Button variant="outline">Sign In with Clerk</Button>
                   </SignInButton>
-                </SignedOut>
-                <SignedIn>
+                </Show>
+                <Show when="signed-in">
                   <OrganizationSwitcher />
                   <UserButton />
-                </SignedIn>
+                </Show>
               </div>
             </header>
             <section className="container mx-auto px-4 py-8 max-w-10xl">
@@ -118,8 +117,8 @@ export default function RootLayout({
               </div>
             </section>
           </main>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

@@ -4,8 +4,7 @@ import {
   CreateOrganization,
   OrganizationList,
   SignInButton,
-  SignedIn,
-  SignedOut,
+  Show,
   UserButton,
   useAuth,
   useOrganizationList,
@@ -100,7 +99,7 @@ export default function Dashboard() {
           Use these components to test for the current user:
         </h3>
         <div className="flex flex-row gap-4">
-          <CreateOrganization  path={'/dashboard'}/>
+          <CreateOrganization path={"/dashboard"} />
           <OrganizationList />
         </div>
       </div>

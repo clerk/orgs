@@ -16,13 +16,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      signUpForceRedirectUrl="/dashboard"
-      signInForceRedirectUrl="/dashboard"
-    >
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={inter.className}>
+        <ClerkProvider
+          signUpForceRedirectUrl="/dashboard"
+          signInForceRedirectUrl="/dashboard"
+        >
+          {children}
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

@@ -8,7 +8,8 @@ export async function PATCH(req: Request) {
   if (!user) return new Response("Unauthorized", { status: 401 });
 
   try {
-    const res = await clerkClient.users.updateUser(user?.id, {
+    const client = await clerkClient();
+    const res = await client.users.updateUser(user.id, {
       createOrganizationEnabled: data.enable,
     });
     return new Response(JSON.stringify(res));

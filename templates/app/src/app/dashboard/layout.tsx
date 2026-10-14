@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import Link from "next/link";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 
