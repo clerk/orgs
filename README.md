@@ -2,7 +2,7 @@
 
 A set of examples using [Clerk's](https://clerk.com) Organizations functionality.
 
-[Orgs](https://clerk.com/docs/organizations/overview) are a flexible way to manage users and their access to resources within your Clerk application. With organizations, you can assign specific roles and permissions to users, making them useful for managing projects, coordinating teams, or facilitating partnerships.
+[Orgs](https://clerk.com/docs/guides/organizations/overview) are a flexible way to manage users and their access to resources within your Clerk application. With organizations, you can assign specific roles and permissions to users, making them useful for managing projects, coordinating teams, or facilitating partnerships.
 
 When you model your B2B Application's customers as Orgs, you can begin to customize their experience in meaningful ways with:
 

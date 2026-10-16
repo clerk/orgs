@@ -2,10 +2,11 @@ import { clerkClient, currentUser } from "@clerk/nextjs/server";
 export const dynamic = "force-dynamic";
 
 export async function PATCH(req: Request) {
-  const data = (await req.json()) as { enable: boolean };
   const user = await currentUser();
 
   if (!user) return new Response("Unauthorized", { status: 401 });
+
+  const data = (await req.json()) as { enable: boolean };
 
   try {
     const client = await clerkClient();

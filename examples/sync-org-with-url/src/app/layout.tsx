@@ -63,27 +63,6 @@ function LayoutContent({
                   Home
                 </Link>
                 <Link
-                  href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/apps` ? "text-primary" : "text-muted-foreground"}`}
-                  prefetch={false}
-                >
-                  Apps{" "}
-                </Link>
-                <Link
-                  href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/activity` ? "text-primary" : "text-muted-foreground"}`}
-                  prefetch={false}
-                >
-                  Activity
-                </Link>
-                <Link
-                  href="#"
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/integrations` ? "text-primary" : "text-muted-foreground"}`}
-                  prefetch={false}
-                >
-                  Integrations
-                </Link>
-                <Link
                   href={`${prefix}/settings`}
                   className={`flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary ${pathname === `${urlPrefix(orgSlug)}/settings` ? "text-primary" : "text-muted-foreground"}`}
                   prefetch={false}
@@ -96,9 +75,6 @@ function LayoutContent({
         </div>
         <div className="flex flex-col">
           <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-muted/40 px-6">
-            <Link href="#" className="lg:hidden" prefetch={false}>
-              <span className="sr-only">Home</span>
-            </Link>
             <div className="flex-1">
               <h1 className="font-semibold text-lg">Dashboard</h1>
             </div>

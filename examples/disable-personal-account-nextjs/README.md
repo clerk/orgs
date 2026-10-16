@@ -2,11 +2,10 @@
 
 This example shows you how to build an application that does not allow users to operate under a _Personal Account_. If you want all users in your application to be in an organization:
 
-1. Navigate to **Organization** page in the Clerk Dashboard.
-2. Enable the organizations feature if not already active.
-   1. The **Allow personal account** option will be disabled by default.
-   
-      Applications created after 08-22-2025 will have personal accounts disabled by default. Applications created before this date will not be able to see the **Allow personal accounts** setting because personal accounts were enabled by default.
+1. In the Clerk Dashboard, open **Organizations → Settings**.
+2. Enable Organizations and select **Membership required**. This requires users to create or join an Organization before using the app.
+
+For applications created before August 22, 2025, the **Membership required** option is unavailable. Use a new development application to test this example. See [Configure Organizations](https://clerk.com/docs/guides/organizations/configure).
 
 ## Set up
 
@@ -16,7 +15,7 @@ Copy the `.env.local.example` file.
 cp .env.local.example .env.local
 ```
 
-Update the following fields in the file with your Clerk application keys. You will find these values in your application's overview page or in **Configure** > **Developers** > **API Keys**.
+Update the following fields with the development keys from your Clerk application's **API keys** page.
 
 ```
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=

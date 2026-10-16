@@ -4,6 +4,8 @@ import { OrganizationList } from "@clerk/nextjs";
 export default async function Home(props: {
   params: Promise<{ slug: string }>;
 }) {
+  await auth.protect();
+
   const params = await props.params;
   const authObject = await auth();
   const orgSlug = authObject.orgSlug;
@@ -23,7 +25,7 @@ export default async function Home(props: {
   }
 
   // The organization name was added to session claims for this application by
-  // [customizing the session token](https://clerk.com/docs/backend-requests/making/custom-session-token),
+  // [customizing the session token](https://clerk.com/docs/guides/sessions/customize-session-tokens),
   // using the following template:
   // ```json
   // {

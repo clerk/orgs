@@ -2,7 +2,7 @@
 
 This example shows you how to use our org creation limitations to control which users can create new organizations.
 
-You can configure limits in [Organization Settings](https://dashboard.clerk.com/last-active?path=organizations-settings) -> Limit Creation in the Clerk Dashboard.
+You can configure a user's Organization creation limit under **Organizations → Settings → Organization limit** in the Clerk Dashboard. See [Configure Organizations](https://clerk.com/docs/guides/organizations/configure#organization-creation-limit).
 
 ## Includes
 
@@ -13,7 +13,7 @@ You can configure limits in [Organization Settings](https://dashboard.clerk.com/
 ## Set Up
 
 ```
-cp .env.example .env.local
+cp .env.local.example .env.local
 ```
 
 ## Getting Started

@@ -1,21 +1,8 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-// Matches routes that enforce organization selection
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
-
-export default clerkMiddleware(
-  async (auth, req) => {
-    if (isProtectedRoute(req)) {
-      await auth.protect();
-    }
-
-    return NextResponse.next();
-  },
-  {
-    signInUrl: "/sign-in",
-  }
-);
+export default clerkMiddleware(() => {}, {
+  signInUrl: "/sign-in",
+});
 
 export const config = {
   matcher: [
