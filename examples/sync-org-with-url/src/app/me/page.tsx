@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 
-export default async function Home(): Promise<{}> {
+export default async function Home() {
   await auth.protect();
 
   const { orgId } = await auth();

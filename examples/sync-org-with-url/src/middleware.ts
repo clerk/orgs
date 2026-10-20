@@ -1,6 +1,6 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
 
-export default clerkMiddleware(() => {}, {
+export default clerkMiddleware({
   organizationSyncOptions: {
     organizationPatterns: [
       "/orgs/:slug", // Matches any organization home page, e.g. /orgs/acmecorp

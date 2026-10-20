@@ -3,10 +3,6 @@ import {
   ClerkLoading,
   CreateOrganization,
   OrganizationList,
-  SignInButton,
-  Show,
-  UserButton,
-  useAuth,
   useOrganizationList,
   useUser,
 } from "@clerk/nextjs";
@@ -19,19 +15,19 @@ export default function Dashboard() {
   const [isUpdating, setIsUpdating] = useState(false);
 
   if (!isLoaded || !isMembershipLoaded) return <ClerkLoading />;
-  console.log(user);
 
   const onChangeOrgCreation = async (enable: boolean) => {
     setIsUpdating(true);
     try {
-      await fetch("/api/org-creation", {
+      const res = await fetch("/api/org-creation", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ enable }),
       });
-      user?.reload();
+      if (!res.ok) throw new Error(await res.text());
+      await user?.reload();
     } catch (error) {
       toast.error(`Error updating org creation status: ${error}`);
     } finally {
