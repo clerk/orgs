@@ -1,7 +1,11 @@
+import type { PropsWithChildren } from "react";
 import Link from "next/link";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
-export default function DashboardLayout({ children }: PropsWithChildren) {
+export default async function DashboardLayout({ children }: PropsWithChildren) {
+  await auth.protect();
+
   return (
     <div className="grid min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 lg:block">
@@ -21,34 +25,6 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
               >
                 Home
               </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                prefetch={false}
-              >
-                Apps{" "}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 text-muted-foreground py-2 transition-all hover:text-primary"
-                prefetch={false}
-              >
-                Activity
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                prefetch={false}
-              >
-                Integrations
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                prefetch={false}
-              >
-                Settings
-              </Link>
 
               <Link
                 href="/"
@@ -62,9 +38,6 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
       </div>
       <div className="flex flex-col">
         <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-muted/40 px-6">
-          <Link href="#" className="lg:hidden" prefetch={false}>
-            <span className="sr-only">Home</span>
-          </Link>
           <div className="flex-1">
             <h1 className="font-semibold text-lg">Dashboard</h1>
           </div>

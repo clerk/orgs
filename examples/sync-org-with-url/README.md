@@ -6,13 +6,19 @@ For more information, please refer to the [DX Guide: Use Organization Slugs in U
 
 ## Set up
 
+In your Clerk development application's Dashboard, open **Organizations → Settings**:
+
+1. Enable **Organizations**.
+2. Set membership to **optional** so you can also use the personal account routes.
+3. Enable **Organization slugs** so each organization can have a URL like `/orgs/acmecorp`.
+
 Copy the `.env.local.example` file.
 
 ```
-cp .env.example .env.local
+cp .env.local.example .env.local
 ```
 
-Update the following fields in the file with your Clerk application keys. You will find these values in your application's overview page or in **Configure** > **Developers** > **API Keys**.
+Update the following fields with the development keys from your Clerk application's **API keys** page.
 
 ```
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=

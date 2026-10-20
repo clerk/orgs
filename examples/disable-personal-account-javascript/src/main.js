@@ -205,7 +205,7 @@ async function handleSignIn(e) {
       showError(signInErrorEl, "Sign in failed. Please check your credentials.");
     }
   } catch (error) {
-    // See https://clerk.com/docs/custom-flows/error-handling
+    // See https://clerk.com/docs/guides/development/custom-flows/error-handling
     // for more info on error handling
     console.error(error);
     
@@ -262,7 +262,7 @@ async function handleSignUp(e) {
       return;
     }
   } catch (error) {
-    // See https://clerk.com/docs/custom-flows/error-handling
+    // See https://clerk.com/docs/guides/development/custom-flows/error-handling
     // for more info on error handling
     console.error(error);
     

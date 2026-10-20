@@ -1,12 +1,14 @@
-import { auth } from '@clerk/nextjs/server';
-import {notFound} from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
+import { notFound } from "next/navigation";
 
-export default async function Home():Promise<{}> {
+export default async function Home() {
+  await auth.protect();
+
   const { orgId } = await auth();
 
-  if (orgId != null ) {
-    console.log("Some org other than the personal account is active!")
-    notFound()
+  if (orgId != null) {
+    console.log("Some org other than the personal account is active!");
+    notFound();
   }
 
   return (
@@ -15,5 +17,5 @@ export default async function Home():Promise<{}> {
         Welcome to your personal account!
       </h2>
     </div>
-  )
+  );
 }
